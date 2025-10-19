@@ -1,4 +1,4 @@
-use std::{ collections::HashMap, env, process::ExitCode };
+use std::{ collections::HashMap, env, io::Write, os::unix::net::UnixStream, process::ExitCode };
 
 use regex::Regex;
 
@@ -30,5 +30,12 @@ fn main() -> Result<(), ExitCode> {
         }
     });
     print!("Args were: {:?}", argmap);
+    let socket = UnixStream::connect("/tmp/eventController");
+    if socket.is_ok() {
+        let json = serde_json::to_string(&argmap).unwrap();
+        socket.unwrap().write(json.as_bytes()).unwrap();
+    } else {
+        panic!("Connection failed: {socket:?}");
+    }
     Ok(())
 }
