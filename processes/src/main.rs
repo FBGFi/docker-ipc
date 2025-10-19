@@ -2,6 +2,7 @@ use std::{ collections::HashMap, env, process::ExitCode };
 
 use regex::Regex;
 
+/// Args must be given as for example: cargo run -- --arg=1
 fn main() -> Result<(), ExitCode> {
     let args: Vec<String> = env::args().collect();
     let mut argmap: HashMap<&str, &str> = HashMap::new();

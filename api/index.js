@@ -51,8 +51,5 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, "0.0.0.0", () => {
   console.log(`Server started on port: ${PORT}`);
-  // eventController.listen("/tmp/eventController", () => {
-  //   console.log("Listening on events");
-  // });
   eventController.on("data", EventQueue.onEventTriggered);
 });

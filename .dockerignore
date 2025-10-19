@@ -24,5 +24,6 @@
 **/values.dev.yaml
 **/build
 **/dist
+**/target
 LICENSE
 README.md

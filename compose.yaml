@@ -14,7 +14,18 @@ services:
   proxy:
     build:
       context: ./proxy
+    depends_on:
+      processes:
+        condition: service_completed_successfully
     volumes:
       - sockets:/tmp
+      - bin:/shared/bin
+  processes:
+    build:
+      context: ./processes
+    volumes:
+      - bin:/shared/bin
+    entrypoint: ["true"]
 volumes:
   sockets:
+  bin:

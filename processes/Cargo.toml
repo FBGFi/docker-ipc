@@ -1,7 +1,11 @@
 [package]
-name = "processes"
+name = "argparse"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
 regex = "1.11.2"
+
+[profile.release]
+opt-level = 3
+strip = true

@@ -1,5 +1,6 @@
 const net = require("node:net");
 const fs = require("fs");
+const { exec } = require("child_process");
 const eventControllerSocketPath = "/tmp/eventController";
 const proxySocketPath = "/tmp/proxy";
 const clients = new Map();
@@ -39,6 +40,12 @@ const proxy = net.createServer((socket) => {
     console.log("Proxy received a request");
     const data = JSON.parse(buffer.toString());
     eventController.emit("request", data);
+    const args = Object.entries(data).map(([key, value]) => `--${key}=${value}`).join(" ");
+    exec(`/shared/bin/processes/argparse -- ${args}`, (error) => {
+      if (error) {
+        console.error(`exec error: ${error}`);
+      }
+    });
   });
 });
 
