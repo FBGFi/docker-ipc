@@ -15,7 +15,7 @@ flowchart
       apps@{ shape: processes, label: "Applications" }
     end
     proxy@{ shape: div-rect, label: "Proxy" }
-    event@{ shape: rounded, label: "Event" }
+    event@{ shape: rounded, label: "Event controller" }
     containers --> proxy --> processes
     subgraph volume["Shared volume"]
       direction TB
