@@ -2,7 +2,19 @@ services:
   api:
     build:
       context: ./api
+    depends_on:
+      proxy:
+        condition: service_started
     environment:
       PORT: 3000
     ports:
       - 3000:3000
+    volumes:
+      - sockets:/tmp
+  proxy:
+    build:
+      context: ./proxy
+    volumes:
+      - sockets:/tmp
+volumes:
+  sockets:
