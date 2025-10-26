@@ -2,6 +2,8 @@
 
 Testing out IPC between docker containers
 
+Start the program by running `docker compose up --build`.
+
 ```mermaid
 ---
 config:
@@ -16,7 +18,7 @@ flowchart
     end
     proxy@{ shape: div-rect, label: "Proxy" }
     event@{ shape: rounded, label: "Event controller" }
-    containers --> proxy --> processes
+    containers e1@--> proxy e2@--> processes
     subgraph volume["Shared volume"]
       direction TB
       processes@{ shape: processes, label: "Processes" }
@@ -24,9 +26,11 @@ flowchart
       db@{ shape: cyl, label: "Database" }
       processes --> disk & db
     end
-    processes e1@--> event e2@--> containers
+    processes e3@--> event e4@--> containers
     e1@{ animate: true }
     e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
   end
 ```
 ```mermaid
